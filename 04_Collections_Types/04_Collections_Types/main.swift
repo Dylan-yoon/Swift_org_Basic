@@ -72,19 +72,32 @@ func arrays() {
     }
     
 }
-
-//arrays()
+// 실행
+// arrays()
 
 //MARK: - 집합(Sets)
+// 아이템의 순서가 중요하지 않거나 아이템이 반복되면 안될 때 배열 대신에 집합을 사용
+
+/*
+ 빈 집합 생성과 초기화 (Creating Initializing an Empty Set)
+ 
+ var set = Set<Type>()
+ 
+ */
 
 func sets() {
+    var sets1: Set<String> = ["aaaa","bbbb","cccc"] // [배열 형식을 타입 지정으로 세트로 지정 가능]
     
+    for i in sets1 {
+        print(i)
+    } //Set도 반복문에 사용 가능
 }
 
+// 실행
+ sets()
 
 
-
-
+// set 오ㅓ
 
 //MARK: - 딕셔너리(Dicitionaries)
 
