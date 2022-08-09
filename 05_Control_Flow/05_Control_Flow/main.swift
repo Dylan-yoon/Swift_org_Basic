@@ -198,21 +198,79 @@ func exSwitch() {
     let temporaryTuple = ("a", 13)
     
     switch temporaryTuple {
-    case (let x, 13) : //임시 상수를 사용해 튜플 값을 받아 올 수 있다. 즉 x를 상수로 사용하지 않으면 _와일드카드와 같다.
+    case (let x, 13) :        //임시 상수를 사용해 튜플 값을 받아 올 수 있다. 즉 x를 상수로 사용하지 않으면 _와일드카드와 같다.
         print("\(x) & 13")
     case ("a", _), ("c", _) : //여러가지 케이스를 사용할 수 있다, 혼합케이스
         print("find \"a\"")
+    case ("a", 13) :                //위에서 조건에 적합해 switch문을 종료했으므로 실행되지 않는다.
+        print("the Same")
     case (let x, 13) where x != "z": //where을 사용해 조건을 추가 할 수 있다.
         print("find \"13\"")
-    case let(x, y) : //모든 경우의 수가 사용되기 때문에 default값을 사용 할 필요가 없다.
+    case let(x, y) :            //모든 경우의 수가 사용되기 때문에 default값을 사용 할 필요가 없다.
         print("\(x) & \(y)")
     }
-
 }
 
-exSwitch()
+//exSwitch()
 
-
+//MARK: - Control Transfer Statements (제어 변경 구문)
 /*
- 즉 switch는
+ - continue
+ - break
+ - fallthrough
+ - return
+ - throw
  */
+
+//MARK: Continue
+// 루프를 통해 다음 반복을 시작하려고 멈추기위해 call한다. 즉 이번 루프는 완료됨을 알린다.
+
+//MARK: Break
+//for, while, switch 내에서 구문을 즉시 종료한다. ( } ) 중괄호 역할을 한다.
+
+//MARK: Fallthrough
+// switch 의 case 에서 조건을 만족하고 자동으로 종료가 되지만 fallthrough 키워드를 사용하면 만족 후에도 다음 케이스로 넘어가게 해준다
+
+//MARK: retrun
+// 함수의 값을 리턴 할 때 사용한다. (Function)
+
+//MARK: throw
+// Error를 던질 때 사용, (Propagating Errors Using Throwing Functions)참고
+
+
+//MARK: -Labeled Statements 라벨이 있는 구문
+
+func labeledStatements() {
+    var count = 20
+
+    
+loofs: while count < 30 {
+        count += 1
+        switch count {
+        case 1...5 :
+            print(count)
+        case 5...10 :
+            print(count, "end")
+            break loofs
+        default :
+            count -= 15
+            continue loofs //여기서 loofs를 해줄 필요없음, 스위치는 continue 되지 않기 때문에 while루프가 continue된다.
+        }
+    }
+}
+
+labeledStatements()
+
+
+//MARK: -Early Exit
+/*
+ if 문과 같이 guard 문은 불 값에 따라 구문을 실행하는데 else를 필수로 하며
+ guard 조건문 else { }
+ 조건문이 거짓이면 실행된다 (if 와 반대)
+ 
+ 중괄호 안에 {return break continue throw 혹은 fatalError} 를 사용 할 수있다.
+ */
+
+
+//MARK: -Checking API Availability
+//Swift는 주어진 타겟에서 사용 불가능한 API를 실수로 사용하는 것을 막기위해 사용 가능한 API 확인 (checking API availability)을 제공합니다.
