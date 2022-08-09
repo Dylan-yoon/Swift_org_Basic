@@ -102,13 +102,117 @@ func exWhile() {
 
 //exWhile()
 
-//MARK: - If
-
-
-
 /*
  - 배열과 반복문에서의 주의할점
  배열을 반복문 혹은 인덱스를 사용 할 때
  배열의 범위를 넘어가지 않도록 주의 -> 런타임 오류 발생
  */
 
+//MARK: - 조건 구문(Conditional Statement)
+
+//MARK: IF
+/*
+ if 조건문 {
+ 
+ } else if 조건문 {
+ 
+ } else if 조건문 {
+ 
+ } else if 조건문 {
+ 
+ } else {
+ 
+ }
+ 
+ 조건문이 True 일때 실행된다.
+ else if , else는 선택사항이다.
+ */
+
+//MARK: Switch
+/*
+ switch _someValueToConsider_ {
+ case value 1 :
+    respond to value 1
+ case value 2,
+      value 3 :
+     respond to value 2 or 3
+ default:
+    otherwise, do something else
+ }
+ 
+ default 는 필수
+ 
+ */
+
+
+//MARK: 명시적 fallthrough(No Implicit Fallthrough)
+/*
+ 다른 언어에서는 case 별로 break를 요구 하는 경우가 많지만 swift 에서는 특정 실행이 완료되기 전에 빠져나와야 할 경우 break를 사용한다.
+ 
+ **특정 switch 케이스에 끝에서 명시적으로 다음 케이스로 떨어뜨리려면 Fallthrough 에서 설명한대로 fallthrough 키워드를 사용한다**
+ */
+
+
+//MARK: Tuples
+/*
+ switch 구문에 여러 값인 튜플 사용 할 수 있다.
+ 튜플 내의 하나의 요소 중 모든 값을 사용 할 수 있도록 _(wildCard Pattern)를 사용 할 수 있다.
+ 
+ case (a, b):
+    print("")
+ caes (_, c):
+    print("")
+ */
+
+//MARK: Value Bindings (값 바인딩)
+/*
+ switch 케이스는 일치하는 값 또는 값들을 임시적 상수 또는 변수로 이름을 가질 수 있으며 케이스 바디 안에서 사용할 수 있습니다. 값은 케이스의 바디 내부에서 임시적 상수 또는 변수로 바인드 되기 때문에 이러한 동작을 값 바인딩 (value binding) 이라 한다.
+ 
+ 
+ case (let x, 0):
+     print("on the x-axis with an x value of \(x)")
+ 이처럼 case 안에서 튜플의 값을 사용하기위해 let x 라는 임시상수를 사용 하여 활용한다.
+ */
+
+//또한 케이스는 where을 사용해 추가 조건 사용할 수 있다.
+//혼합 케이스 (Compound Cases)
+
+
+
+func exSwitch() {
+    let temporaryNumber = 10
+
+    switch temporaryNumber {
+    case 1...9 :
+        print("num is 1...9")
+    case 10...11 :
+        print("ten")
+    default :
+        print("default value")
+    }
+    
+    //기본적인 switch 구문
+    
+    //위에서 기술한 내용들을 적용해보면
+    
+    let temporaryTuple = ("a", 13)
+    
+    switch temporaryTuple {
+    case (let x, 13) : //임시 상수를 사용해 튜플 값을 받아 올 수 있다. 즉 x를 상수로 사용하지 않으면 _와일드카드와 같다.
+        print("\(x) & 13")
+    case ("a", _), ("c", _) : //여러가지 케이스를 사용할 수 있다, 혼합케이스
+        print("find \"a\"")
+    case (let x, 13) where x != "z": //where을 사용해 조건을 추가 할 수 있다.
+        print("find \"13\"")
+    case let(x, y) : //모든 경우의 수가 사용되기 때문에 default값을 사용 할 필요가 없다.
+        print("\(x) & \(y)")
+    }
+
+}
+
+exSwitch()
+
+
+/*
+ 즉 switch는
+ */
