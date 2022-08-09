@@ -12,7 +12,6 @@ import Foundation
  for index in items {
     반복구문
  }
- 
  items에 딕셔너리, 배열 혹은, 1...3 ClosedRange<Int> 범위 연산자. 등등 들어간다.
  
  */
@@ -38,7 +37,6 @@ func forIn() {
 }
 
 //forIn()
-
 
 
 //MARK: -While 루프
@@ -93,7 +91,7 @@ func exWhile() {
     } while b < 3
     
     /*
-     - while과 repeat-while을 사용 시 유의사항 -
+     --- while과 repeat-while을 사용 시 유의사항 ---
      조건이 바로 일치 되더라도 while 최초 1번을 사용하기 위해서 사용한다.
 
      위에서 처럼 실행되지 않는다는 (Will never be executed) 경고창이 나타난다
@@ -164,6 +162,7 @@ func exWhile() {
     print("")
  */
 
+
 //MARK: Value Bindings (값 바인딩)
 /*
  switch 케이스는 일치하는 값 또는 값들을 임시적 상수 또는 변수로 이름을 가질 수 있으며 케이스 바디 안에서 사용할 수 있습니다. 값은 케이스의 바디 내부에서 임시적 상수 또는 변수로 바인드 되기 때문에 이러한 동작을 값 바인딩 (value binding) 이라 한다.
@@ -176,7 +175,6 @@ func exWhile() {
 
 //또한 케이스는 where을 사용해 추가 조건 사용할 수 있다.
 //혼합 케이스 (Compound Cases)
-
 
 
 func exSwitch() {
@@ -213,6 +211,7 @@ func exSwitch() {
 
 //exSwitch()
 
+
 //MARK: - Control Transfer Statements (제어 변경 구문)
 /*
  - continue
@@ -221,6 +220,7 @@ func exSwitch() {
  - return
  - throw
  */
+
 
 //MARK: Continue
 // 루프를 통해 다음 반복을 시작하려고 멈추기위해 call한다. 즉 이번 루프는 완료됨을 알린다.
