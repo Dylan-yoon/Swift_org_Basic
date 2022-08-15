@@ -100,15 +100,67 @@ func arguTest3(name: String) {}
 //arguTest2(<#T##name: String##String#>)
 //arguTest3(name: <#T##String#>)
 
+
+// 1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣1️⃣
+//가변 파라미터를 사용 할 수 있다. 뒤에 기간 문자(...) 추가하면 된다!
+func variadicParameter(_ initInt: Int, _ number: Int.../*, _ a: Int... -> 가변 파라미터는 맨 마지막에 1개만 선언 가능*/) -> Int {
+    var sum = initInt
+    
+    for num in number {
+        sum += num
+    }
+    return sum
+}
+//let variadic = variadicParameter(10, 1,2,3,4,5)
+//print(variadic)
+
+
 /*
+                    In-Out Parameters
+ 함수의 파라미터는 상수, 파라미터 값을 변경하면 컴파일 에러가 발생하기 때문에, 변경하고 수정하기 위해 In-Out 파라미터를 사용한다.
+ */
+func inoutPara(_ inouts: inout String) {
+    print(inouts)
+    inouts = "inout으로 변경!"
+    print(inouts)
+}
+//⚠️ inoutPara(&"inout으로 변경 가능하다!") 오류 발생, 변상수로 만들어 사용
+var inoutPara = "inout으로 변경 가능하다!"
+inoutPara(&inoutPara)
+//호출 할 때 & 를 사용해 변경가능함을 알린다.
+
+
+// 반환 타입으로 함수 타입 - Function Types as Return Types
  
- 
- 
- 3️⃣
- 
- 
- 
- 
+func exReturnFunc1(_ addnum: Int) -> Int {
+    addnum + 50
+}
+func exReturnFunc2(_ addnum: Int) -> Int {
+    addnum + 5000
+}
+
+func exReturnedFunc(istrue: Bool) -> (Int) -> Int {
+    istrue ? exReturnFunc1(_:) : exReturnFunc2(_:)
+}
+
+/*
+ func exReturnedFunc(istrue: Bool) -> (Int) -> Int {
+ 여기서 (istrue: Bool) -> (Int) -> Int 의 의미는
+ exReturnedFunc 이라는 함수는
+ Bool 값을 받아와서
+ (Int) -> Int 라는 함수를 반환한다는 것
+ */
+
+var currentCount = 500
+let printReturn = exReturnedFunc(istrue: currentCount > 100)
+print(printReturn) //printReturn 은 exReturnedFunc의 return값인 함수를 반환하기 때문에 출력시 Function으로 나온다.
+currentCount = printReturn(currentCount)
+print(currentCount)
+
+/*
+ 중첩함수 - Nested Function
+ 함수안의 함수
+ 즉 전역 함수 안에서 함수를 정의 할 수 있음.
  
  */
 
