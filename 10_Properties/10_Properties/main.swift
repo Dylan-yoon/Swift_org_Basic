@@ -41,23 +41,118 @@ class DataManager {
 let manager = DataManager()
 manager.data.append("some Data")
 
+//MARK: - Computed Properties
+// 저장된 프로퍼티, 클래스, 구조체, 열거형은 값을 실질적으로 저장하지 않는 계산된 프로퍼티를 정의할 수 있다.
+// getter, optional<Setter>을 제공
+// var name: type {}
+/*
+ var name: type {
+    get {return}
+    set {}
+ }
+ */
+
+// 먼저 getter setter을 사용 하기 위해서, 연산 프로퍼티는 자신을 지지고 볶는것이아닌 행해질 저장프로퍼티가 무조건 필요함
+// 1. get 만사용
+// 2. get set 사용
+// set만 사용 할 수 없다.
+// set의 newValue는 get의 리턴값이다
+// get 만 사용한다면 get 생략해 줄 수 있다.
+
+
+
+
+// 공식문서 코드
+struct Point {
+    var x = 0.0, y = 0.0
+}
+struct Size {
+    var width = 0.0, height = 0.0
+}
+struct Rect {
+    var origin = Point()
+    var size = Size()
+    var center: Point {
+        get {
+            let centerX = origin.x + (size.width / 2)
+            let centerY = origin.y + (size.height / 2)
+            print("ggggg")
+            return Point(x: centerX, y: centerY)
+        }
+        set(newCenter) {
+            print("settttttttting")
+            origin.x = newCenter.x - (size.width / 2)
+            origin.y = newCenter.y - (size.height / 2)
+        }
+    }
+}
+
+var square = Rect(
+    origin: Point(x: 0.0, y: 0.0),
+    size: Size(width: 10.0, height: 10.0)
+)
+print("center : ", square.center)
+let initialSquareCenter = square.center // getting
+// initialSquareCenter is at (5.0, 5.0)
+
+square.center = Point(x: 15.0, y: 15.0) //setting
+print("square.origin is now at (\(square.origin.x), \(square.origin.y))")
+
+//var temp = Rect()
+//temp.size.width = 66
+//temp.size.height = 22
+//
+//print(temp.center)
+//print(temp.origin)
+
+print("")
+struct computedProperties {
+    var total = 0
+    var cost = 4500
+    var callCount = 0
+    
+    var wallet: Int {
+        get {
+            return total * cost
+        }
+        set {
+            callCount += 1
+            print(newValue)
+        }
+    }
+}
+var exComputed = computedProperties()
+exComputed.total = 5
+print(exComputed.wallet)
+
+
+
+//MARK: Shorthand Setter Declaration
+struct ShorthandGetter {
+    var storedNumber = 10
+
+    var shorthand: Int {
+        get {
+            let getInt = storedNumber + 100
+            return getInt
+        }
+    }
+}
+//var exGetter = ShorthandGetter()
+//exGetter.storedNumber = 100
+//print("exGetter.storedNumber : ",exGetter.shorthand)
+//exGetter.storedNumber = 200
+//print("exGetter.storedNumber : ",exGetter.shorthand)
+
+
+//MARK: Shorthand Getter Declaration
+//MARK: Read-Only Computed Properties
+//위에서 간단 정리
 
 //MARK: -
 
-
-
-//MARK: -
-
-
-
-
-//MARK: -
-
-
 //MARK: -
 
 //MARK: -
 
-
-
-
+//MARK: -
