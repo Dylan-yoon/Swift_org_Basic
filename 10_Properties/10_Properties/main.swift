@@ -87,25 +87,18 @@ struct Rect {
     }
 }
 
-var square = Rect(
-    origin: Point(x: 0.0, y: 0.0),
-    size: Size(width: 10.0, height: 10.0)
-)
-print("center : ", square.center)
-let initialSquareCenter = square.center // getting
-// initialSquareCenter is at (5.0, 5.0)
-
-square.center = Point(x: 15.0, y: 15.0) //setting
-print("square.origin is now at (\(square.origin.x), \(square.origin.y))")
-
-//var temp = Rect()
-//temp.size.width = 66
-//temp.size.height = 22
+////풀어서 해바바
+//var square = Rect(
+//    origin: Point(x: 0.0, y: 0.0),
+//    size: Size(width: 10.0, height: 10.0)
+//)
+//print("center : ", square.center)
+//let initialSquareCenter = square.center // getting
+//// initialSquareCenter is at (5.0, 5.0)
 //
-//print(temp.center)
-//print(temp.origin)
+//square.center = Point(x: 15.0, y: 15.0) //setting
+//print("square.origin is now at (\(square.origin.x), \(square.origin.y))")
 
-print("")
 struct computedProperties {
     var total = 0
     var cost = 4500
@@ -113,19 +106,31 @@ struct computedProperties {
     
     var wallet: Int {
         get {
+            print("get : ", total, cost)
             return total * cost
         }
         set {
             callCount += 1
-            print(newValue)
+            print("call setter : ", newValue)
         }
     }
 }
+
 var exComputed = computedProperties()
-exComputed.total = 5
-print(exComputed.wallet)
 
+exComputed.total = 1
+exComputed.total = 2
+print(exComputed.wallet) //get 실행된다. -> get :  2 4500; 9000
 
+let dragonMoney = exComputed.wallet + 50000 //get :  2 4500
+print(dragonMoney)
+//print(exComputed.wallet) // get :  2 4500; 9000
+
+//그렇다면 setter 는 언제 사용되는데?...?
+print("callCount : "
+      , exComputed.callCount)
+exComputed.wallet = 100000 // wallet을 직접적으로 수정 했을 때 setter 호출
+print("callCount : ", exComputed.callCount)
 
 //MARK: Shorthand Setter Declaration
 struct ShorthandGetter {
@@ -138,6 +143,7 @@ struct ShorthandGetter {
         }
     }
 }
+
 //var exGetter = ShorthandGetter()
 //exGetter.storedNumber = 100
 //print("exGetter.storedNumber : ",exGetter.shorthand)
@@ -148,6 +154,8 @@ struct ShorthandGetter {
 //MARK: Shorthand Getter Declaration
 //MARK: Read-Only Computed Properties
 //위에서 간단 정리
+
+
 
 //MARK: -
 
