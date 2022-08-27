@@ -198,22 +198,44 @@ class observers {
     }
 }
 
-var dragonMoney = observers()
-print("0------------------------")
-dragonMoney.myWallet = 90000
-// 90000으로 세팅이 되었음
-print("1------------------------")
-dragonMoney.myWallet = 200000
-// 20만으로 세팅 되었음
-print("2------------------------")
-// 같은 값을 호출 해도 똑같이 감시된다
-dragonMoney.myWallet = 200_000
+////풀어서 해방
+//var dragonMoney = observers()
+//print("0------------------------")
+//dragonMoney.myWallet = 90000
+//// 90000으로 세팅이 되었음
+//print("1------------------------")
+//dragonMoney.myWallet = 200000
+//// 20만으로 세팅 되었음
+//print("2------------------------")
+//// 같은 값을 호출 해도 똑같이 감시된다
+//dragonMoney.myWallet = 200_000
 
 //NOTE
 //관찰자를 가진 프로퍼티를 in-out 파라미터로 함수에 전달하면 willSet 과 didSet 관찰자는 항상 호출됩니다. 이것은 in-out 파라미터에 대한 copy-in-copy-out 메모리 모델 때문에 그렇습니다. 값은 함수 끝에서 프로퍼티에 항상 다시 작성됩니다. in-out 파라미터에 대한 자세한 내용은 In-Out 파라미터 (In-Out Parameters) 를 참고 바랍니다.
 
 
-//MARK: -
+//MARK: - Property Wrappers
+// @propertyWrapper
+// 프로퍼티 정의 -> 프로퍼티 저장  ,, 에서
+// 프로퍼티 정의 -> 분리계층추가 (쓰레드의 안정성 검사, 기본 데이터를 데이터베이스에 저장하는 프로퍼티가 있는 경우 작성한다)  -> 프로퍼티 저장
+
+struct TwelveOrLess {
+    private var number = 0
+    var wrappedValue: Int {
+        get { return number }
+        set { number = min(newValue, 12) }
+    }
+}
+
+@TwelveOrLess
+
+
+
+//print("0------------------------")
+
+
+
+
 
 //MARK: -
 
