@@ -5,6 +5,8 @@
 //  Created by Dylan_Yoon on 2022/06/20.
 //
 
+print("Property")
+
 //MARK: - Stored Properties
 // 1. variable stored properties (keyWord 'var')
 // 2. constat stored properties (keyWord 'let')
@@ -117,32 +119,32 @@ struct computedProperties {
 }
 
 var exComputed = computedProperties()
-
-exComputed.total = 1
-exComputed.total = 2
-print(exComputed.wallet) //get 실행된다. -> get :  2 4500; 9000
-
-let dragonMoney = exComputed.wallet + 50000 //get :  2 4500
-print(dragonMoney)
-//print(exComputed.wallet) // get :  2 4500; 9000
-
-//그렇다면 setter 는 언제 사용되는데?...?
-print("callCount : "
-      , exComputed.callCount)
-exComputed.wallet = 100000 // wallet을 직접적으로 수정 했을 때 setter 호출
-print("callCount : ", exComputed.callCount)
-
-//MARK: Shorthand Setter Declaration
-struct ShorthandGetter {
-    var storedNumber = 10
-
-    var shorthand: Int {
-        get {
-            let getInt = storedNumber + 100
-            return getInt
-        }
-    }
-}
+////열어서 해봐~
+//exComputed.total = 1
+//exComputed.total = 2
+//print(exComputed.wallet) //get 실행된다. -> get :  2 4500; 9000
+//
+//let 용돈 = exComputed.wallet + 50000 //get :  2 4500
+//print(용돈)
+////print(exComputed.wallet) // get :  2 4500; 9000
+//
+////그렇다면 setter 는 언제 사용되는데?...?
+//print("callCount : "
+//      , exComputed.callCount)
+//exComputed.wallet = 100000 // wallet을 직접적으로 수정 했을 때 setter 호출
+//print("callCount : ", exComputed.callCount)
+//
+////MARK: Shorthand Setter Declaration
+//struct ShorthandGetter {
+//    var storedNumber = 10
+//
+//    var shorthand: Int {
+//        get {
+//            let getInt = storedNumber + 100
+//            return getInt
+//        }
+//    }
+//}
 
 //var exGetter = ShorthandGetter()
 //exGetter.storedNumber = 100
@@ -157,7 +159,59 @@ struct ShorthandGetter {
 
 
 
-//MARK: -
+//MARK: - Property Observers
+//willSet didSet
+/*
+ 정의한 저장된 프로퍼티
+ 상속한 저장된 프로퍼티
+ 상속한 계산된 프로퍼티
+ */
+
+/*
+ willSet 값이 저장되기 직전
+ didSet 값이 저장된 후
+ */
+
+/*
+ 선언
+ var name = value {
+    willSet(newValue -> 지정하지않으면 newValue) {
+    
+    }
+    didSet(oldValue -> 지정하지않으면 oldValue) {
+    
+    }
+ }
+ */
+
+class observers {
+    var myWallet: Int = 50000 {
+        willSet {
+            print("용돈 개꿀 ,oldValue : ", newValue)
+        }
+        didSet {
+            //공식문서에서 처럼 if문 등 다양하게 사용 가능
+            if myWallet > 100000 {
+                print("지갑 터지겠어~ : newValue", oldValue)
+            }
+        }
+    }
+}
+
+var dragonMoney = observers()
+print("0------------------------")
+dragonMoney.myWallet = 90000
+// 90000으로 세팅이 되었음
+print("1------------------------")
+dragonMoney.myWallet = 200000
+// 20만으로 세팅 되었음
+print("2------------------------")
+// 같은 값을 호출 해도 똑같이 감시된다
+dragonMoney.myWallet = 200_000
+
+//NOTE
+//관찰자를 가진 프로퍼티를 in-out 파라미터로 함수에 전달하면 willSet 과 didSet 관찰자는 항상 호출됩니다. 이것은 in-out 파라미터에 대한 copy-in-copy-out 메모리 모델 때문에 그렇습니다. 값은 함수 끝에서 프로퍼티에 항상 다시 작성됩니다. in-out 파라미터에 대한 자세한 내용은 In-Out 파라미터 (In-Out Parameters) 를 참고 바랍니다.
+
 
 //MARK: -
 
