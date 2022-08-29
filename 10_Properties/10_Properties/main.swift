@@ -219,24 +219,51 @@ class observers {
 // 프로퍼티 정의 -> 프로퍼티 저장  ,, 에서
 // 프로퍼티 정의 -> 분리계층추가 (쓰레드의 안정성 검사, 기본 데이터를 데이터베이스에 저장하는 프로퍼티가 있는 경우 작성한다)  -> 프로퍼티 저장
 
-struct TwelveOrLess {
+@propertyWrapper
+struct TwelveOrLess { //class 로 가능
     private var number = 0
     var wrappedValue: Int {
         get { return number }
-        set { number = min(newValue, 12) }
+        set {
+            if number == 1 {
+                number = 100
+            }
+        }
     }
 }
 
-@TwelveOrLess
+struct SmallRectangle {
+    @TwelveOrLess var height: Int
+    @TwelveOrLess var width: Int
+}
+print("0------------------------")
+
+var rectangle = SmallRectangle()
+print(rectangle.height)
+// Prints "0"
+
+rectangle.height = 10
+print(rectangle.height)
+// Prints "10"
+
+rectangle.height = 24
+print(rectangle.height)
+// Prints "12"
+
+print(rectangle)
+// SmallRectangle(_height: _0_Properties.TwelveOrLess(number: 12), _width: _0_Properties.TwelveOrLess(number: 0))
+
+
+print("0------------------------")
+
+@propertyWrapper
+struct FruitIsEnough {
+    var wrappedValue: Int
+}
 
 
 
-//print("0------------------------")
 
+//MARK: - Global and Local Variable....
 
-
-
-
-//MARK: -
-
-//MARK: -
+//MARK: - Type Properties
