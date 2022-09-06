@@ -118,7 +118,68 @@ print("------------------------------------------------")
 print("------------------------------------------------")
 //MARK: -Default Initializers
 print("Default Initializers")
+//공식문서 예제
+struct Size {
+    var width = 0.0, height = 0.0
+}
+struct Point {
+    var x = 0.0, y = 0.0
+}
 
+struct Rect {
+    var origin = Point()
+    var size = Size()
+    init() {} // 사용하지 않는다면? 기본값으로 초기화 되지 않는다.
+    init(origin: Point, size: Size) {
+        self.origin = origin
+        self.size = size
+    }
+    init(center: Point, size: Size) {
+        let originX = center.x - (size.width / 2)
+        let originY = center.y - (size.height / 2)
+        self.init(origin: Point(x: originX, y: originY), size: size)
+    }
+}
+//let basicRect = Rect()
+//let originRect = Rect(origin: <#T##Point#>, size: <#T##Size#>)
+//let centerRect = Rect(center: <#T##Point#>, size: <#T##Size#>)
+//이렇게 값타입의 struct의 경우 간단하게 initializer Delegation이 적용된다.
+
+struct CoffeeSize {
+    enum CupSize {
+        case tall, grande, venti
+    }
+    var size = CupSize.tall
+}
+
+struct CoffeeTemperature {
+    var temperature = 30
+}
+
+struct Coffee {
+    var size = CoffeeSize()
+    var temperature = CoffeeTemperature()
+    
+    init() {}
+    init(size: CoffeeSize, temperature: CoffeeTemperature) {
+        self.size = size
+        self.temperature = temperature
+    }
+    init(size: CoffeeSize, lowTemperature: CoffeeTemperature) {
+        let lowTemperatureCoffee = lowTemperature.temperature - 20
+        self.init(size: size, temperature: lowTemperature)
+        self.init(size: size, temperature: CoffeeTemperature(temperature: lowTemperatureCoffee))
+    }
+}
+
+let firstinit = Coffee()
+let secondinit = Coffee(size: CoffeeSize(size: .grande), temperature: CoffeeTemperature(temperature: 50))
+let thirdinit = Coffee(size: CoffeeSize(), lowTemperature: CoffeeTemperature(temperature: 50))
+print(thirdinit.temperature)
+//예제를 약간 모방해서 만들어봄
+// 1. 일반적으로 size, temperature의 각각 타입의 초기값으로 초기화가 진행된다.
+// 2. size, temperautre 의 각각 타입 초기화를 시켜준다.
+// 3. 2번에서의 온도값에서 20을 차감한 값을 계산하여 초기화한다.
 
 
 print("------------------------------------------------")
