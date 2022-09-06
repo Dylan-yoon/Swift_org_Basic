@@ -97,7 +97,21 @@ print("------------------------------------------------")
 print("------------------------------------------------")
 //MARK: -Customizing Initalization
 print("Customizing Initalization")
+class defualtInit {
+    var name = "dylan"
+    var age = 21
+    var job: String?
+}
+// 각각의 기본값으로 설정되는 이니셜라이저
 
+print("Memberwise Initializers for Structure Type")
+struct structMemberwise {
+    var person = true
+    var name: String
+    var age: Int
+    let firstName: String
+}
+//let someoneMemberwise = structMemberwise(name: <#T##String#>, age: <#T##Int#>, firstName: <#T##String#>)
 
 
 print("------------------------------------------------")
