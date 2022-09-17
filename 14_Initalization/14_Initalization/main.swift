@@ -22,9 +22,16 @@ struct MyName {
 }
 
 print("Default Property Values")
+struct DefaultValue {
+    var defaultValueOne: Int = 1
+}
+//기본값 설정
 
-
+print("------------------------------------------------")
+print("------------------------------------------------")
+//MARK: -Customizing Initalization
 print("Customizing Initialization")
+
 struct Exchanging {
     var won: Double
     init(USD: Double) {
@@ -82,27 +89,50 @@ let david = PersonInfo(name: "david")
 david.girlFirend = "Juliet"
 hamo.ask()
 david.ask()
-print(hamo.girlFirend)
-
-
+//print(hamo.girlFirend)
+//david.name = "dylan"
+//초기화 하는동안 프로퍼티 상수는
 //optional 로 선언이 되면 자동적으로 nil값을 할당해준다.
 
 print("Assigning Constant Properties During Initialization")
-//david.name = "dylan"
-//초기화 하는동안 프로퍼티 상수는
+//값이 초기화가 완료 될 때까지 즉, 인스턴스화 될 때 까지라고 볼 수 있다.
+//초기화가 완료 되기 전까지 상수에 값을 할당 할 수 있다.
+
+class 신분증 {
+    var name: String = "이름"
+    let birth: Int
+    var adress: String?
+    
+    init(name: String, birth: Int, adress: String? = nil) {
+        self.name = name
+        self.birth = birth
+        self.adress = adress
+    }
+}
+let namecard = 신분증(name: "이름", birth: 001024)
 
 
 
 print("------------------------------------------------")
 print("------------------------------------------------")
-//MARK: -Customizing Initalization
-print("Customizing Initalization")
+//MARK: -Default Initializers
+print("Default Initializers")
+
 class defualtInit {
     var name = "dylan"
     var age = 21
     var job: String?
+    
+    init(name: String = "dylan", age: Int = 21, job: String? = nil) {
+        self.name = name
+        self.age = age
+        self.job = job
+    }
 }
 // 각각의 기본값으로 설정되는 이니셜라이저
+
+let defau = defualtInit(name: "david")
+// 초기화 구문이 있다면 변경가능하다.!
 
 print("Memberwise Initializers for Structure Type")
 struct structMemberwise {
@@ -114,10 +144,12 @@ struct structMemberwise {
 //let someoneMemberwise = structMemberwise(name: <#T##String#>, age: <#T##Int#>, firstName: <#T##String#>)
 
 
+
 print("------------------------------------------------")
 print("------------------------------------------------")
-//MARK: -Default Initializers
-print("Default Initializers")
+//MARK: -Initializer Delegation for Value Types
+print("Initializer Delegation for Value Types")
+
 //공식문서 예제
 struct Size {
     var width = 0.0, height = 0.0
@@ -182,10 +214,6 @@ print(thirdinit.temperature)
 // 3. 2번에서의 온도값에서 20을 차감한 값을 계산하여 초기화한다.
 
 
-print("------------------------------------------------")
-print("------------------------------------------------")
-//MARK: -Initializer Delegation for Value Types
-print("Initializer Delegation for Value Types")
 
 
 
@@ -193,6 +221,40 @@ print("------------------------------------------------")
 print("------------------------------------------------")
 //MARK: -Class Inheritance and Initialization
 print("Class Inheritance and Initialization")
+
+enum Gender {
+    case man, woman
+}
+
+class SuperClass {
+    var name: String
+    var age: Int
+    let gender: Gender
+    
+    
+    init(name: String, age: Int, gender: Gender) {
+        self.name = name
+        self.age = age
+        self.gender = gender
+    }
+    
+    convenience init(name: String, gender: Gender) {
+        self.init(name: name, age: 0, gender: gender)
+    }
+}
+
+//class SubClass: SuperClass {
+//    var job: String
+//
+//    init(job: String) {
+//        self.job = job
+////        super.init(name: "", age: 1, gender: .man)
+////        super.init(name: "", gender: .man)
+//    }
+//}
+
+//let people1 = SuperClass()
+
 
 
 
@@ -216,3 +278,7 @@ print("------------------------------------------------")
 print("Setting a Default Property Value with Closure or Function")
 
 
+print("------------------------------------------------")
+print("------------------------------------------------")
+//MARK: -Initializer Delegation for Value Types
+print("Initializer Delegation for Value Types")
