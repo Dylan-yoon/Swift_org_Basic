@@ -70,3 +70,12 @@ struct ExampleMap {
 var a = ExampleMap()
 a.mapArray()
 
+struct ExampleCompactMap {
+    func aa() {
+        let transedMapArray: [Int] = [10, 19, 32, 40, 35]
+        
+        let a = transedMapArray.flatMap(<#T##transform: (Int) throws -> Sequence##(Int) throws -> Sequence#>)
+        
+        print(a)
+    }
+}
